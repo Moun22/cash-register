@@ -1,0 +1,55 @@
+{
+  "name": "cash-register",
+  "version": "0.1.0",
+  "main": "main.js",
+  "description": "Logiciel de caisse - projet final Electron M2",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-builder install-app-deps",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moun22/cash-register.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Moun22/cash-register/issues"
+  },
+  "homepage": "https://github.com/Moun22/cash-register#readme",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1"
+  },
+  "build": {
+    "appId": "com.cashregister.app",
+    "productName": "Cash Register",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "services/**/*",
+      "ipc/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

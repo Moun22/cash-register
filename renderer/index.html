@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'" />
+  <title>Cash Register</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Cash Register</div>
+    <nav class="onglets">
+      <button class="onglet actif" data-view="catalogue">Catalogue</button>
+      <button class="onglet" data-view="caisse">Caisse</button>
+      <button class="onglet" data-view="historique">Historique</button>
+      <button class="onglet" data-view="dashboard">Tableau de bord</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- VUE CATALOGUE -->
+    <section id="view-catalogue" class="vue">
+      <div class="bloc">
+        <h2>Ajouter un produit</h2>
+        <form id="form-ajout-produit" class="formulaire">
+          <input type="text" id="code-barres" placeholder="Code-barres (optionnel)" inputmode="numeric" />
+          <input type="text" id="nom" placeholder="Nom" required />
+          <input type="number" id="prix" placeholder="Prix" step="0.01" min="0.01" required />
+          <input type="text" id="description" placeholder="Description (optionnel)" />
+          <button type="submit">Ajouter</button>
+        </form>
+        <p id="message-ajout" class="message"></p>
+      </div>
+
+      <div class="bloc">
+        <div class="ligne-titre">
+          <h2>Catalogue</h2>
+          <input type="text" id="recherche-produit" placeholder="Rechercher (nom, code-barres, description)..." />
+        </div>
+        <table class="tableau" id="tableau-produits">
+          <thead>
+            <tr>
+              <th>Code-barres</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="corps-produits"></tbody>
+        </table>
+        <p id="message-vide" class="vide">Aucun produit dans le catalogue.</p>
+      </div>
+    </section>
+
+    <!-- VUE CAISSE -->
+    <section id="view-caisse" class="vue cache">
+      <div class="bloc">
+        <h2>Caisse</h2>
+        <p class="vide">Disponible dans l'iteration suivante.</p>
+      </div>
+    </section>
+
+    <!-- VUE HISTORIQUE -->
+    <section id="view-historique" class="vue cache">
+      <div class="bloc">
+        <h2>Historique des ventes</h2>
+        <p class="vide">Disponible dans une iteration ulterieure.</p>
+      </div>
+    </section>
+
+    <!-- VUE DASHBOARD -->
+    <section id="view-dashboard" class="vue cache">
+      <div class="bloc">
+        <h2>Tableau de bord</h2>
+        <p class="vide">Disponible dans une iteration ulterieure.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

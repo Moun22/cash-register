@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6fa;
+  color: #1f2937;
+  min-height: 100vh;
+}
+
+header {
+  background: #0f172a;
+  color: white;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.onglets {
+  display: flex;
+  gap: 4px;
+}
+
+.onglet {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.onglet:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.onglet.actif {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+main {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.vue {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vue.cache {
+  display: none;
+}
+
+.bloc {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-size: 16px;
+  color: #334155;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.ligne-titre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.ligne-titre h2 {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ligne-titre input {
+  max-width: 360px;
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.formulaire {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 0.7fr 1.5fr auto;
+  gap: 10px;
+}
+
+.formulaire input {
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.formulaire input:focus,
+.ligne-titre input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.formulaire button {
+  padding: 9px 18px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.formulaire button:hover {
+  background: #2563eb;
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.message.succes { color: #059669; }
+.message.erreur { color: #b91c1c; }
+
+.tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tableau thead {
+  background: #f8fafc;
+}
+
+.tableau th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: #475569;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tableau td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.tableau tbody tr:hover {
+  background: #f8fafc;
+}
+
+.col-actions {
+  width: 140px;
+  text-align: right;
+}
+
+.tableau .actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.tableau .actions button {
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tableau .actions button:hover {
+  background: #f1f5f9;
+}
+
+.tableau .actions button.danger {
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.tableau .actions button.danger:hover {
+  background: #fef2f2;
+}
+
+.tableau input.edition-prix {
+  width: 80px;
+  padding: 4px 6px;
+  border: 1px solid #3b82f6;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.badge-source {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-source.manuel {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badge-source.openfoodfacts {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.vide {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 14px;
+  text-align: center;
+  padding: 14px 0;
+}
