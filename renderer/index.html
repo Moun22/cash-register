@@ -15,6 +15,10 @@
       <button class="onglet" data-view="historique">Historique</button>
       <button class="onglet" data-view="dashboard">Tableau de bord</button>
     </nav>
+    <div id="indicateur-connexion" class="indicateur-connexion en-ligne">
+      <span class="point"></span>
+      <span class="texte">En ligne</span>
+    </div>
   </header>
 
   <main>
@@ -23,12 +27,13 @@
       <div class="bloc">
         <h2>Ajouter un produit</h2>
         <form id="form-ajout-produit" class="formulaire">
-          <input type="text" id="code-barres" placeholder="Code-barres (optionnel)" inputmode="numeric" />
+          <input type="text" id="code-barres" placeholder="Code-barres (scan ou tape)" inputmode="numeric" />
           <input type="text" id="nom" placeholder="Nom" required />
           <input type="number" id="prix" placeholder="Prix" step="0.01" min="0.01" required />
           <input type="text" id="description" placeholder="Description (optionnel)" />
           <button type="submit">Ajouter</button>
         </form>
+        <p id="statut-lookup" class="statut-lookup"></p>
         <p id="message-ajout" class="message"></p>
       </div>
 
@@ -56,9 +61,25 @@
 
     <!-- VUE CAISSE -->
     <section id="view-caisse" class="vue cache">
-      <div class="bloc">
-        <h2>Caisse</h2>
-        <p class="vide">Disponible dans l'iteration suivante.</p>
+      <div class="grille-caisse">
+        <div class="bloc">
+          <h2>Ajouter au panier</h2>
+          <input type="text" id="recherche-caisse" class="champ-large" placeholder="Recherche par nom ou code-barres..." />
+          <div id="resultats-recherche" class="resultats-caisse"></div>
+        </div>
+
+        <div class="bloc">
+          <h2>Panier</h2>
+          <div id="liste-panier" class="liste-panier"></div>
+
+          <div class="total-caisse">
+            <span>Total</span>
+            <span id="montant-total" class="montant">0.00 EUR</span>
+          </div>
+
+          <button id="btn-valider-vente" class="valider" disabled>Valider la vente</button>
+          <p id="message-vente" class="message"></p>
+        </div>
       </div>
     </section>
 
@@ -79,6 +100,6 @@
     </section>
   </main>
 
-  <script src="renderer.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>

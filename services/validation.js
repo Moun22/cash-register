@@ -43,4 +43,25 @@ function calculerTotal(lignes) {
   return lignes.reduce((somme, l) => somme + Number(l.prix_unitaire) * Number(l.quantite), 0);
 }
 
-module.exports = { validerProduit, validerLigneVente, calculerTotal };
+function validerVente(panier) {
+  if (!Array.isArray(panier) || panier.length === 0) {
+    return { valide: false, erreurs: ['Le panier est vide.'] };
+  }
+
+  for (let i = 0; i < panier.length; i++) {
+    const v = validerLigneVente(panier[i]);
+    if (!v.valide) {
+      return {
+        valide: false,
+        erreurs: v.erreurs.map((e) => `Ligne ${i + 1} : ${e}`)
+      };
+    }
+    if (!panier[i].nom_snapshot || typeof panier[i].nom_snapshot !== 'string') {
+      return { valide: false, erreurs: [`Ligne ${i + 1} : nom_snapshot manquant.`] };
+    }
+  }
+
+  return { valide: true, erreurs: [] };
+}
+
+module.exports = { validerProduit, validerLigneVente, calculerTotal, validerVente };

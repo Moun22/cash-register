@@ -42,6 +42,13 @@ function init() {
       valeur TEXT
     );
 
+    CREATE TABLE IF NOT EXISTS off_cache (
+      code_barres       TEXT PRIMARY KEY,
+      nom               TEXT NOT NULL,
+      description       TEXT,
+      date_recuperation TEXT NOT NULL
+    );
+
     CREATE INDEX IF NOT EXISTS idx_products_nom         ON products(nom);
     CREATE INDEX IF NOT EXISTS idx_products_code_barres ON products(code_barres);
     CREATE INDEX IF NOT EXISTS idx_ventes_date          ON ventes(date_iso);

@@ -3,6 +3,8 @@ const path = require('path');
 
 const db = require('./services/db');
 const productsIPC = require('./ipc/products.ipc');
+const ventesIPC = require('./ipc/ventes.ipc');
+const systemeIPC = require('./ipc/systeme.ipc');
 
 if (process.platform === 'win32') {
   app.setAppUserModelId('com.cashregister.app');
@@ -32,6 +34,8 @@ function creerFenetre() {
 app.whenReady().then(() => {
   db.init();
   productsIPC.enregistrer();
+  ventesIPC.enregistrer();
+  systemeIPC.enregistrer();
   creerFenetre();
 
   app.on('activate', () => {

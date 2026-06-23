@@ -21,6 +21,36 @@ header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.indicateur-connexion {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.indicateur-connexion .point {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.indicateur-connexion.en-ligne .point {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.indicateur-connexion.hors-ligne .point {
+  background: #94a3b8;
+}
+
+.indicateur-connexion.hors-ligne .texte {
+  color: #94a3b8;
+}
+
 .logo {
   font-size: 18px;
   font-weight: 700;
@@ -154,6 +184,18 @@ h2 {
 .message.succes { color: #059669; }
 .message.erreur { color: #b91c1c; }
 
+.statut-lookup {
+  margin-top: 8px;
+  font-size: 12px;
+  min-height: 16px;
+  color: #64748b;
+}
+
+.statut-lookup.recherche { color: #2563eb; }
+.statut-lookup.trouve    { color: #059669; }
+.statut-lookup.non-trouve { color: #d97706; }
+.statut-lookup.hors-ligne { color: #94a3b8; }
+
 .tableau {
   width: 100%;
   border-collapse: collapse;
@@ -249,4 +291,159 @@ h2 {
   font-size: 14px;
   text-align: center;
   padding: 14px 0;
+}
+
+/* --- Vue Caisse --- */
+.grille-caisse {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+}
+
+.champ-large {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.champ-large:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.resultats-caisse {
+  margin-top: 12px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.resultat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.resultat:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.resultat .nom {
+  font-weight: 500;
+}
+
+.resultat .prix {
+  color: #475569;
+  font-weight: 600;
+}
+
+.liste-panier {
+  min-height: 80px;
+  margin-bottom: 16px;
+}
+
+.ligne-panier {
+  display: grid;
+  grid-template-columns: 1fr 80px 110px 90px 28px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+}
+
+.ligne-panier .nom { font-weight: 500; }
+.ligne-panier .pu  { color: #94a3b8; font-size: 13px; }
+
+.ligne-panier .qte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ligne-panier .qte button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ligne-panier .qte button:hover {
+  background: #f1f5f9;
+}
+
+.ligne-panier .qte .valeur {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.ligne-panier .sous-total {
+  text-align: right;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.ligne-panier .x {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #b91c1c;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.ligne-panier .x:hover {
+  color: #7f1d1d;
+}
+
+.total-caisse {
+  background: #1e293b;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.total-caisse .montant {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+button.valider {
+  width: 100%;
+  padding: 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+button.valider:hover:not(:disabled) {
+  background: #059669;
+}
+
+button.valider:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
 }
