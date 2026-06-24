@@ -1,45 +1,31 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('path');
 
 const db = require('./services/db');
+const windowManager = require('./window-manager');
+
 const productsIPC = require('./ipc/products.ipc');
 const ventesIPC = require('./ipc/ventes.ipc');
+const historiqueIPC = require('./ipc/historique.ipc');
 const systemeIPC = require('./ipc/systeme.ipc');
 
 if (process.platform === 'win32') {
   app.setAppUserModelId('com.cashregister.app');
 }
 
-let fenetrePrincipale = null;
-
-function creerFenetre() {
-  fenetrePrincipale = new BrowserWindow({
-    width: 1200,
-    height: 760,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false,
-      sandbox: true
-    }
-  });
-
-  fenetrePrincipale.loadFile(path.join(__dirname, 'renderer', 'index.html'));
-
-  fenetrePrincipale.on('closed', () => {
-    fenetrePrincipale = null;
-  });
-}
-
 app.whenReady().then(() => {
   db.init();
+
   productsIPC.enregistrer();
   ventesIPC.enregistrer();
+  historiqueIPC.enregistrer();
   systemeIPC.enregistrer();
-  creerFenetre();
+
+  windowManager.creerFenetrePrincipale();
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) creerFenetre();
+    if (BrowserWindow.getAllWindows().length === 0) {
+      windowManager.creerFenetrePrincipale();
+    }
   });
 });
 

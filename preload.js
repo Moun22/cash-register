@@ -1,25 +1,15 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge } = require('electron');
 
-const catalogue = {
-  lister: () => ipcRenderer.invoke('products:lister'),
-  rechercher: (criteres) => ipcRenderer.invoke('products:rechercher', criteres),
-  trouver: (id) => ipcRenderer.invoke('products:trouver', id),
-  ajouter: (donnees) => ipcRenderer.invoke('products:ajouter', donnees),
-  modifier: (id, donnees) => ipcRenderer.invoke('products:modifier', id, donnees),
-  supprimer: (id) => ipcRenderer.invoke('products:supprimer', id)
-};
-
-const caisse = {
-  enregistrerVente: (panier) => ipcRenderer.invoke('ventes:enregistrer', panier)
-};
-
-const systeme = {
-  lookupOpenFoodFacts: (codeBarres) =>
-    ipcRenderer.invoke('openfoodfacts:lookup', codeBarres)
-};
+const catalogue = require('./preload/catalogue');
+const caisse = require('./preload/caisse');
+const historique = require('./preload/historique');
+const systeme = require('./preload/systeme');
+const events = require('./preload/events');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   catalogue,
   caisse,
-  systeme
+  historique,
+  systeme,
+  events
 });

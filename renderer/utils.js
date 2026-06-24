@@ -20,3 +20,15 @@ export function afficherMessageTemporaire(idElement, texte, classe, dureeMs = 40
     el.className = 'message';
   }, dureeMs);
 }
+
+export function formaterDateLocale(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  const jour = String(d.getDate()).padStart(2, '0');
+  const mois = String(d.getMonth() + 1).padStart(2, '0');
+  const annee = d.getFullYear();
+  const heure = String(d.getHours()).padStart(2, '0');
+  const minute = String(d.getMinutes()).padStart(2, '0');
+  return `${jour}/${mois}/${annee} ${heure}:${minute}`;
+}

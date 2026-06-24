@@ -10,8 +10,8 @@
   <header>
     <div class="logo">Cash Register</div>
     <nav class="onglets">
-      <button class="onglet actif" data-view="catalogue">Catalogue</button>
-      <button class="onglet" data-view="caisse">Caisse</button>
+      <button class="onglet actif" data-view="caisse">Caisse</button>
+      <button class="onglet" data-view="catalogue">Catalogue</button>
       <button class="onglet" data-view="historique">Historique</button>
       <button class="onglet" data-view="dashboard">Tableau de bord</button>
     </nav>
@@ -22,8 +22,32 @@
   </header>
 
   <main>
+    <!-- VUE CAISSE -->
+    <section id="view-caisse" class="vue">
+      <div class="grille-caisse">
+        <div class="bloc">
+          <h2>Ajouter au panier</h2>
+          <input type="text" id="recherche-caisse" class="champ-large" placeholder="Recherche par nom ou code-barres..." autofocus />
+          <div id="resultats-recherche" class="resultats-caisse"></div>
+        </div>
+
+        <div class="bloc">
+          <h2>Panier</h2>
+          <div id="liste-panier" class="liste-panier"></div>
+
+          <div class="total-caisse">
+            <span>Total</span>
+            <span id="montant-total" class="montant">0.00 EUR</span>
+          </div>
+
+          <button id="btn-valider-vente" class="valider" disabled>Valider la vente</button>
+          <p id="message-vente" class="message"></p>
+        </div>
+      </div>
+    </section>
+
     <!-- VUE CATALOGUE -->
-    <section id="view-catalogue" class="vue">
+    <section id="view-catalogue" class="vue cache">
       <div class="bloc">
         <h2>Ajouter un produit</h2>
         <form id="form-ajout-produit" class="formulaire">
@@ -59,35 +83,52 @@
       </div>
     </section>
 
-    <!-- VUE CAISSE -->
-    <section id="view-caisse" class="vue cache">
-      <div class="grille-caisse">
-        <div class="bloc">
-          <h2>Ajouter au panier</h2>
-          <input type="text" id="recherche-caisse" class="champ-large" placeholder="Recherche par nom ou code-barres..." />
-          <div id="resultats-recherche" class="resultats-caisse"></div>
-        </div>
-
-        <div class="bloc">
-          <h2>Panier</h2>
-          <div id="liste-panier" class="liste-panier"></div>
-
-          <div class="total-caisse">
-            <span>Total</span>
-            <span id="montant-total" class="montant">0.00 EUR</span>
-          </div>
-
-          <button id="btn-valider-vente" class="valider" disabled>Valider la vente</button>
-          <p id="message-vente" class="message"></p>
-        </div>
-      </div>
-    </section>
-
     <!-- VUE HISTORIQUE -->
     <section id="view-historique" class="vue cache">
       <div class="bloc">
         <h2>Historique des ventes</h2>
-        <p class="vide">Disponible dans une iteration ulterieure.</p>
+        <div class="filtres-historique">
+          <label>Du <input type="date" id="hist-date-debut" /></label>
+          <label>Au <input type="date" id="hist-date-fin" /></label>
+          <button id="hist-rafraichir">Filtrer</button>
+          <button id="hist-reset">Tout afficher</button>
+          <div class="separateur"></div>
+          <button id="hist-exporter-csv" class="export-csv">Exporter CSV</button>
+          <button id="hist-exporter-pdf" class="export-pdf">Exporter PDF</button>
+        </div>
+        <table class="tableau" id="tableau-historique">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Articles</th>
+              <th>Total</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="corps-historique"></tbody>
+        </table>
+        <p id="message-historique-vide" class="vide">Aucune vente.</p>
+      </div>
+
+      <div class="bloc" id="bloc-detail-vente" style="display: none">
+        <h2>Detail de la vente <span id="detail-id"></span></h2>
+        <p id="detail-meta" class="meta-vente"></p>
+        <table class="tableau">
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Quantite</th>
+              <th>Prix unitaire</th>
+              <th class="col-actions">Sous-total</th>
+            </tr>
+          </thead>
+          <tbody id="corps-detail"></tbody>
+        </table>
+        <div class="total-caisse">
+          <span>Total</span>
+          <span id="detail-total" class="montant"></span>
+        </div>
       </div>
     </section>
 
@@ -95,7 +136,7 @@
     <section id="view-dashboard" class="vue cache">
       <div class="bloc">
         <h2>Tableau de bord</h2>
-        <p class="vide">Disponible dans une iteration ulterieure.</p>
+        <p class="vide">Disponible dans une iteration ulterieure (KPIs, bestsellers).</p>
       </div>
     </section>
   </main>

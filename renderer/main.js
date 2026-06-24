@@ -1,11 +1,13 @@
 import { initCatalogue } from './views/catalogue.js';
 import { initCaisse } from './views/caisse.js';
+import { initHistorique } from './views/historique.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   brancherOnglets();
   brancherIndicateurConnexion();
-  initCatalogue();
   initCaisse();
+  initCatalogue();
+  initHistorique();
 });
 
 function brancherOnglets() {

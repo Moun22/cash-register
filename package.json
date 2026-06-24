@@ -26,7 +26,8 @@
     "electron-builder": "^26.15.3"
   },
   "dependencies": {
-    "better-sqlite3": "^12.11.1"
+    "better-sqlite3": "^12.11.1",
+    "pdfkit": "^0.19.1"
   },
   "build": {
     "appId": "com.cashregister.app",
@@ -36,10 +37,12 @@
     },
     "files": [
       "main.js",
+      "window-manager.js",
       "preload.js",
+      "preload/**/*",
+      "renderer/**/*",
       "services/**/*",
       "ipc/**/*",
-      "renderer/**/*",
       "assets/**/*",
       "node_modules/**/*",
       "package.json"
