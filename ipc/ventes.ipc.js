@@ -1,5 +1,6 @@
 const { ipcMain, Notification } = require('electron');
 const ventesService = require('../services/ventes.service');
+const i18nService = require('../services/i18n.service');
 const windowManager = require('../window-manager');
 
 function enregistrer() {
@@ -8,8 +9,11 @@ function enregistrer() {
 
     if (resultat.ok) {
       new Notification({
-        title: 'Vente enregistree',
-        body: `#${resultat.venteId} : ${resultat.total.toFixed(2)} EUR`
+        title: i18nService.t('notification.vente_titre'),
+        body: i18nService.t('notification.vente_corps', {
+          id: resultat.venteId,
+          total: `${resultat.total.toFixed(2)} EUR`
+        })
       }).show();
 
       windowManager.broadcast('data:ventes-changed');

@@ -1,5 +1,6 @@
 const { ipcMain, dialog, BrowserWindow } = require('electron');
 const productsService = require('../services/products.service');
+const i18nService = require('../services/i18n.service');
 
 function fenetreDe(event) {
   return BrowserWindow.fromWebContents(event.sender);
@@ -32,11 +33,14 @@ function enregistrer() {
 
     const { response } = await dialog.showMessageBox(fenetreDe(event), {
       type: 'warning',
-      buttons: ['Annuler', 'Supprimer'],
+      buttons: [i18nService.t('dialog.bouton_annuler'), i18nService.t('dialog.bouton_supprimer')],
       defaultId: 0,
       cancelId: 0,
-      message: 'Supprimer ce produit ?',
-      detail: `${produit.nom} (${produit.prix.toFixed(2)} EUR)\nL'historique des ventes sera conserve.`
+      message: i18nService.t('dialog.supprimer_produit_message'),
+      detail: i18nService.t('dialog.supprimer_produit_detail', {
+        nom: produit.nom,
+        prix: `${produit.prix.toFixed(2)} EUR`
+      })
     });
 
     if (response !== 1) return false;

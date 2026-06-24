@@ -1,0 +1,125 @@
+{
+  "app": { "nom": "Cash Register" },
+  "onglets": {
+    "caisse": "Caisse",
+    "catalogue": "Catalogue",
+    "historique": "Historique",
+    "dashboard": "Tableau de bord"
+  },
+  "indicateur": {
+    "en_ligne": "En ligne",
+    "hors_ligne": "Hors ligne"
+  },
+  "preferences": {
+    "langue": "Langue",
+    "theme": "Theme",
+    "theme_clair": "Clair",
+    "theme_sombre": "Sombre"
+  },
+  "caisse": {
+    "titre_ajouter": "Ajouter au panier",
+    "placeholder_recherche": "Recherche par nom ou code-barres...",
+    "titre_panier": "Panier",
+    "panier_vide": "Panier vide.",
+    "total": "Total",
+    "valider": "Valider la vente",
+    "vente_enregistree": "Vente #{id} enregistree ({total})."
+  },
+  "catalogue": {
+    "titre_ajout": "Ajouter un produit",
+    "placeholder_code_barres": "Code-barres (scan ou tape)",
+    "placeholder_nom": "Nom",
+    "placeholder_prix": "Prix",
+    "placeholder_description": "Description (optionnel)",
+    "bouton_ajouter": "Ajouter",
+    "titre_catalogue": "Catalogue",
+    "placeholder_recherche": "Rechercher...",
+    "col_code_barres": "Code-barres",
+    "col_nom": "Nom",
+    "col_prix": "Prix",
+    "col_description": "Description",
+    "col_source": "Source",
+    "col_actions": "Actions",
+    "bouton_editer": "Editer",
+    "bouton_enregistrer": "Enregistrer",
+    "bouton_supprimer": "Supprimer",
+    "produit_ajoute": "{nom} ajoute au catalogue.",
+    "aucun_produit": "Aucun produit dans le catalogue.",
+    "aucun_resultat": "Aucun produit ne correspond a la recherche.",
+    "supprime_badge": "supprime"
+  },
+  "historique": {
+    "titre": "Historique des ventes",
+    "du": "Du",
+    "au": "Au",
+    "filtrer": "Filtrer",
+    "tout_afficher": "Tout afficher",
+    "exporter_csv": "Exporter CSV",
+    "exporter_pdf": "Exporter PDF",
+    "col_id": "#",
+    "col_date": "Date",
+    "col_articles": "Articles",
+    "col_total": "Total",
+    "col_actions": "Actions",
+    "bouton_detail": "Detail",
+    "aucune_vente": "Aucune vente.",
+    "detail_titre": "Detail de la vente",
+    "detail_meta": "Enregistree le {date}",
+    "detail_col_produit": "Produit",
+    "detail_col_quantite": "Quantite",
+    "detail_col_prix_unitaire": "Prix unitaire",
+    "detail_col_sous_total": "Sous-total",
+    "detail_aucune_ligne": "Aucune ligne enregistree."
+  },
+  "dashboard": {
+    "titre": "Tableau de bord",
+    "placeholder": "Disponible dans une iteration ulterieure (KPIs, bestsellers)."
+  },
+  "openfoodfacts": {
+    "recherche": "Recherche OpenFoodFacts...",
+    "trouve": "Trouve : {nom}",
+    "trouve_cache": "Trouve : {nom} (cache)",
+    "hors_ligne": "Pas de connexion : saisie manuelle.",
+    "non_trouve": "Non trouve sur OpenFoodFacts : saisie manuelle."
+  },
+  "dialog": {
+    "supprimer_produit_message": "Supprimer ce produit ?",
+    "supprimer_produit_detail": "{nom} ({prix})\nL'historique des ventes sera conserve.",
+    "bouton_annuler": "Annuler",
+    "bouton_supprimer": "Supprimer",
+    "rien_a_exporter_titre": "Rien a exporter",
+    "rien_a_exporter_message": "Aucune vente dans la periode selectionnee.",
+    "rien_a_exporter_detail": "Modifiez les filtres ou ajoutez des ventes avant d'exporter."
+  },
+  "notification": {
+    "vente_titre": "Vente enregistree",
+    "vente_corps": "#{id} : {total}"
+  },
+  "export": {
+    "titre_pdf": "Rapport de ventes",
+    "periode_pdf": "Periode : {debut} au {fin}",
+    "generation_pdf": "Genere le {date}",
+    "total_vente_pdf": "Total vente : {total}",
+    "total_periode_pdf": "TOTAL PERIODE : {total}",
+    "nb_ventes_pdf": "{n} vente",
+    "nb_ventes_pdf_pluriel": "{n} ventes",
+    "csv_id": "Vente ID",
+    "csv_date": "Date",
+    "csv_produit": "Produit",
+    "csv_quantite": "Quantite",
+    "csv_prix_unitaire": "Prix unitaire",
+    "csv_sous_total": "Sous-total",
+    "csv_aucune_ligne": "(aucune ligne)"
+  },
+  "validation": {
+    "nom_requis": "Le nom est requis.",
+    "prix_positif": "Le prix doit etre un nombre strictement positif.",
+    "code_barres_invalide": "Le code-barres ne doit contenir que des chiffres.",
+    "code_barres_existe": "Un produit avec ce code-barres existe deja.",
+    "code_barres_autre_existe": "Un autre produit utilise deja ce code-barres.",
+    "produit_introuvable": "Produit introuvable.",
+    "panier_vide": "Le panier est vide.",
+    "quantite_invalide": "La quantite doit etre un entier strictement positif.",
+    "prix_unitaire_invalide": "Le prix unitaire doit etre un nombre positif ou nul."
+  }
+}

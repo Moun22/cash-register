@@ -43,6 +43,7 @@
       "renderer/**/*",
       "services/**/*",
       "ipc/**/*",
+      "locales/**/*",
       "assets/**/*",
       "node_modules/**/*",
       "package.json"

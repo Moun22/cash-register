@@ -1,0 +1,125 @@
+{
+  "app": { "nom": "Cash Register" },
+  "onglets": {
+    "caisse": "Checkout",
+    "catalogue": "Catalog",
+    "historique": "History",
+    "dashboard": "Dashboard"
+  },
+  "indicateur": {
+    "en_ligne": "Online",
+    "hors_ligne": "Offline"
+  },
+  "preferences": {
+    "langue": "Language",
+    "theme": "Theme",
+    "theme_clair": "Light",
+    "theme_sombre": "Dark"
+  },
+  "caisse": {
+    "titre_ajouter": "Add to cart",
+    "placeholder_recherche": "Search by name or barcode...",
+    "titre_panier": "Cart",
+    "panier_vide": "Empty cart.",
+    "total": "Total",
+    "valider": "Complete sale",
+    "vente_enregistree": "Sale #{id} recorded ({total})."
+  },
+  "catalogue": {
+    "titre_ajout": "Add a product",
+    "placeholder_code_barres": "Barcode (scan or type)",
+    "placeholder_nom": "Name",
+    "placeholder_prix": "Price",
+    "placeholder_description": "Description (optional)",
+    "bouton_ajouter": "Add",
+    "titre_catalogue": "Catalog",
+    "placeholder_recherche": "Search...",
+    "col_code_barres": "Barcode",
+    "col_nom": "Name",
+    "col_prix": "Price",
+    "col_description": "Description",
+    "col_source": "Source",
+    "col_actions": "Actions",
+    "bouton_editer": "Edit",
+    "bouton_enregistrer": "Save",
+    "bouton_supprimer": "Delete",
+    "produit_ajoute": "{nom} added to catalog.",
+    "aucun_produit": "No product in the catalog.",
+    "aucun_resultat": "No product matches the search.",
+    "supprime_badge": "deleted"
+  },
+  "historique": {
+    "titre": "Sales history",
+    "du": "From",
+    "au": "To",
+    "filtrer": "Filter",
+    "tout_afficher": "Show all",
+    "exporter_csv": "Export CSV",
+    "exporter_pdf": "Export PDF",
+    "col_id": "#",
+    "col_date": "Date",
+    "col_articles": "Items",
+    "col_total": "Total",
+    "col_actions": "Actions",
+    "bouton_detail": "Details",
+    "aucune_vente": "No sale.",
+    "detail_titre": "Sale details",
+    "detail_meta": "Recorded on {date}",
+    "detail_col_produit": "Product",
+    "detail_col_quantite": "Quantity",
+    "detail_col_prix_unitaire": "Unit price",
+    "detail_col_sous_total": "Subtotal",
+    "detail_aucune_ligne": "No line recorded."
+  },
+  "dashboard": {
+    "titre": "Dashboard",
+    "placeholder": "Coming in a future iteration (KPIs, bestsellers)."
+  },
+  "openfoodfacts": {
+    "recherche": "Searching OpenFoodFacts...",
+    "trouve": "Found: {nom}",
+    "trouve_cache": "Found: {nom} (cache)",
+    "hors_ligne": "No connection: enter manually.",
+    "non_trouve": "Not found on OpenFoodFacts: enter manually."
+  },
+  "dialog": {
+    "supprimer_produit_message": "Delete this product?",
+    "supprimer_produit_detail": "{nom} ({prix})\nSale history will be preserved.",
+    "bouton_annuler": "Cancel",
+    "bouton_supprimer": "Delete",
+    "rien_a_exporter_titre": "Nothing to export",
+    "rien_a_exporter_message": "No sale in the selected period.",
+    "rien_a_exporter_detail": "Adjust the filters or add sales before exporting."
+  },
+  "notification": {
+    "vente_titre": "Sale recorded",
+    "vente_corps": "#{id}: {total}"
+  },
+  "export": {
+    "titre_pdf": "Sales report",
+    "periode_pdf": "Period: {debut} to {fin}",
+    "generation_pdf": "Generated on {date}",
+    "total_vente_pdf": "Sale total: {total}",
+    "total_periode_pdf": "PERIOD TOTAL: {total}",
+    "nb_ventes_pdf": "{n} sale",
+    "nb_ventes_pdf_pluriel": "{n} sales",
+    "csv_id": "Sale ID",
+    "csv_date": "Date",
+    "csv_produit": "Product",
+    "csv_quantite": "Quantity",
+    "csv_prix_unitaire": "Unit price",
+    "csv_sous_total": "Subtotal",
+    "csv_aucune_ligne": "(no line)"
+  },
+  "validation": {
+    "nom_requis": "Name is required.",
+    "prix_positif": "Price must be a strictly positive number.",
+    "code_barres_invalide": "Barcode must contain digits only.",
+    "code_barres_existe": "A product with this barcode already exists.",
+    "code_barres_autre_existe": "Another product is already using this barcode.",
+    "produit_introuvable": "Product not found.",
+    "panier_vide": "Cart is empty.",
+    "quantite_invalide": "Quantity must be a strictly positive integer.",
+    "prix_unitaire_invalide": "Unit price must be a positive or zero number."
+  }
+}

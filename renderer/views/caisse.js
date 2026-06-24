@@ -1,4 +1,5 @@
 import { escapeHTML, formaterPrix, afficherMessageTemporaire } from '../utils.js';
+import { t } from '../i18n.js';
 
 let panier = [];
 
@@ -64,7 +65,7 @@ function afficherPanier() {
   const bouton = document.getElementById('btn-valider-vente');
 
   if (panier.length === 0) {
-    conteneur.innerHTML = '<p class="vide">Panier vide.</p>';
+    conteneur.innerHTML = `<p class="vide">${t('caisse.panier_vide')}</p>`;
     bouton.disabled = true;
   } else {
     conteneur.innerHTML = panier.map((l, i) => `
@@ -114,7 +115,7 @@ async function gererValidation() {
   if (resultat.ok) {
     afficherMessageTemporaire(
       'message-vente',
-      `Vente #${resultat.venteId} enregistree (${formaterPrix(resultat.total)}).`,
+      t('caisse.vente_enregistree', { id: resultat.venteId, total: formaterPrix(resultat.total) }),
       'succes'
     );
     panier = [];

@@ -4,6 +4,7 @@ const fs = require('fs');
 const openfoodfactsService = require('../services/openfoodfacts.service');
 const ventesService = require('../services/ventes.service');
 const exportService = require('../services/export.service');
+const i18nService = require('../services/i18n.service');
 
 function fenetreDe(event) {
   return BrowserWindow.fromWebContents(event.sender);
@@ -21,9 +22,9 @@ function chargerVentesAvecLignes(filtres) {
 async function avertirAucuneVente(fenetre) {
   await dialog.showMessageBox(fenetre, {
     type: 'info',
-    title: 'Rien a exporter',
-    message: 'Aucune vente dans la periode selectionnee.',
-    detail: 'Modifiez les filtres ou ajoutez des ventes avant d\'exporter.'
+    title: i18nService.t('dialog.rien_a_exporter_titre'),
+    message: i18nService.t('dialog.rien_a_exporter_message'),
+    detail: i18nService.t('dialog.rien_a_exporter_detail')
   });
 }
 
@@ -42,14 +43,14 @@ function enregistrer() {
     }
 
     const { filePath, canceled } = await dialog.showSaveDialog(fenetre, {
-      title: 'Exporter les ventes en CSV',
+      title: i18nService.t('historique.exporter_csv'),
       defaultPath: `ventes-${new Date().toISOString().slice(0, 10)}.csv`,
       filters: [{ name: 'CSV', extensions: ['csv'] }]
     });
 
     if (canceled || !filePath) return false;
 
-    const contenu = exportService.genererCSV(ventes, lignesParVente);
+    const contenu = exportService.genererCSV(ventes, lignesParVente, i18nService);
     fs.writeFileSync(filePath, contenu, 'utf-8');
     shell.showItemInFolder(filePath);
     return true;
@@ -65,14 +66,14 @@ function enregistrer() {
     }
 
     const { filePath, canceled } = await dialog.showSaveDialog(fenetre, {
-      title: 'Exporter les ventes en PDF',
+      title: i18nService.t('historique.exporter_pdf'),
       defaultPath: `rapport-ventes-${new Date().toISOString().slice(0, 10)}.pdf`,
       filters: [{ name: 'PDF', extensions: ['pdf'] }]
     });
 
     if (canceled || !filePath) return false;
 
-    const buffer = await exportService.genererPDF(ventes, lignesParVente, filtres);
+    const buffer = await exportService.genererPDF(ventes, lignesParVente, filtres, i18nService);
     fs.writeFileSync(filePath, buffer);
     shell.showItemInFolder(filePath);
     return true;

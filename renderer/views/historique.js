@@ -1,4 +1,5 @@
 import { escapeHTML, formaterPrix, formaterDateLocale } from '../utils.js';
+import { t } from '../i18n.js';
 
 export function initHistorique() {
   document.getElementById('hist-rafraichir').addEventListener('click', rafraichirListe);
@@ -50,7 +51,7 @@ async function rafraichirListe() {
       <td>${formaterPrix(v.total)}</td>
       <td class="col-actions">
         <div class="actions">
-          <button data-action="detail" data-id="${v.id}">Detail</button>
+          <button data-action="detail" data-id="${v.id}">${t('historique.bouton_detail')}</button>
         </div>
       </td>
     </tr>
@@ -68,16 +69,16 @@ async function afficherDetail(venteId) {
   if (!vente) return;
 
   document.getElementById('detail-id').textContent = `#${vente.id}`;
-  document.getElementById('detail-meta').textContent = `Enregistree le ${formaterDateLocale(vente.date_iso)}`;
+  document.getElementById('detail-meta').textContent = t('historique.detail_meta', { date: formaterDateLocale(vente.date_iso) });
   document.getElementById('detail-total').textContent = formaterPrix(vente.total);
 
   const corps = document.getElementById('corps-detail');
   if (lignes.length === 0) {
-    corps.innerHTML = '<tr><td colspan="4" class="vide">Aucune ligne enregistree.</td></tr>';
+    corps.innerHTML = `<tr><td colspan="4" class="vide">${t('historique.detail_aucune_ligne')}</td></tr>`;
   } else {
     corps.innerHTML = lignes.map((l) => `
       <tr>
-        <td>${escapeHTML(l.nom_snapshot)}${l.product_id ? '' : ' <span class="badge-source manuel">supprime</span>'}</td>
+        <td>${escapeHTML(l.nom_snapshot)}${l.product_id ? '' : ` <span class="badge-source manuel">${t('catalogue.supprime_badge')}</span>`}</td>
         <td>${l.quantite}</td>
         <td>${formaterPrix(l.prix_unitaire)}</td>
         <td class="col-actions">${formaterPrix(l.prix_unitaire * l.quantite)}</td>
@@ -96,4 +97,3 @@ async function exporter(format) {
     : window.electronAPI.systeme.exporterPDF;
   await action(obtenirFiltres());
 }
-

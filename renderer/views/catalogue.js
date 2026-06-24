@@ -1,4 +1,5 @@
 import { escapeHTML, formaterPrix, afficherMessageTemporaire } from '../utils.js';
+import { t } from '../i18n.js';
 
 let filtreRecherche = '';
 let lignesEnEdition = new Set();
@@ -24,7 +25,7 @@ async function gererAjout(event) {
   const resultat = await window.electronAPI.catalogue.ajouter(donnees);
 
   if (resultat.ok) {
-    afficherMessageTemporaire('message-ajout', `${resultat.product.nom} ajoute au catalogue.`, 'succes');
+    afficherMessageTemporaire('message-ajout', t('catalogue.produit_ajoute', { nom: resultat.product.nom }), 'succes');
     event.target.reset();
     mettreAJourStatutLookup('');
     rafraichirCatalogue();
@@ -44,7 +45,7 @@ function gererInputCodeBarres(event) {
 }
 
 async function lancerLookup(code) {
-  mettreAJourStatutLookup('Recherche OpenFoodFacts...', 'recherche');
+  mettreAJourStatutLookup(t('openfoodfacts.recherche'), 'recherche');
   const r = await window.electronAPI.systeme.lookupOpenFoodFacts(code);
 
   if (r.found) {
@@ -52,17 +53,17 @@ async function lancerLookup(code) {
     if (r.product.description) {
       document.getElementById('description').value = r.product.description;
     }
-    const origine = r.source === 'cache' ? ' (cache)' : '';
-    mettreAJourStatutLookup(`Trouve : ${r.product.nom}${origine}`, 'trouve');
+    const cle = r.source === 'cache' ? 'openfoodfacts.trouve_cache' : 'openfoodfacts.trouve';
+    mettreAJourStatutLookup(t(cle, { nom: r.product.nom }), 'trouve');
     return;
   }
 
   if (r.offline) {
-    mettreAJourStatutLookup('Pas de connexion : saisie manuelle.', 'hors-ligne');
+    mettreAJourStatutLookup(t('openfoodfacts.hors_ligne'), 'hors-ligne');
     return;
   }
 
-  mettreAJourStatutLookup('Non trouve sur OpenFoodFacts : saisie manuelle.', 'non-trouve');
+  mettreAJourStatutLookup(t('openfoodfacts.non_trouve'), 'non-trouve');
 }
 
 function mettreAJourStatutLookup(texte, classe = '') {
@@ -87,8 +88,8 @@ async function rafraichirCatalogue() {
     tableau.style.display = 'none';
     messageVide.style.display = 'block';
     messageVide.textContent = filtreRecherche
-      ? 'Aucun produit ne correspond a la recherche.'
-      : 'Aucun produit dans le catalogue.';
+      ? t('catalogue.aucun_resultat')
+      : t('catalogue.aucun_produit');
     return;
   }
 
@@ -107,8 +108,8 @@ function construireLigne(produit) {
     : formaterPrix(produit.prix);
 
   const boutonPrix = enEdition
-    ? `<button data-action="enregistrer" data-id="${produit.id}">Enregistrer</button>`
-    : `<button data-action="editer" data-id="${produit.id}">Editer</button>`;
+    ? `<button data-action="enregistrer" data-id="${produit.id}">${t('catalogue.bouton_enregistrer')}</button>`
+    : `<button data-action="editer" data-id="${produit.id}">${t('catalogue.bouton_editer')}</button>`;
 
   return `
     <tr data-id="${produit.id}">
@@ -120,7 +121,7 @@ function construireLigne(produit) {
       <td class="col-actions">
         <div class="actions">
           ${boutonPrix}
-          <button data-action="supprimer" data-id="${produit.id}" class="danger">Supprimer</button>
+          <button data-action="supprimer" data-id="${produit.id}" class="danger">${t('catalogue.bouton_supprimer')}</button>
         </div>
       </td>
     </tr>

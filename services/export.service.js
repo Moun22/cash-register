@@ -24,14 +24,32 @@ function ligneCSV(...champs) {
   return champs.map(echapperCSV).join(',');
 }
 
-function genererCSV(ventes, lignesParVente) {
-  const lignes = [ligneCSV('Vente ID', 'Date', 'Produit', 'Quantite', 'Prix unitaire', 'Sous-total')];
+function tradOuDefaut(i18n, cle, defaut) {
+  if (i18n && typeof i18n.t === 'function') {
+    const v = i18n.t(cle);
+    if (v && v !== cle) return v;
+  }
+  return defaut;
+}
+
+function genererCSV(ventes, lignesParVente, i18n = null) {
+  const T = (cle, def) => tradOuDefaut(i18n, cle, def);
+  const NO_LINE = T('export.csv_aucune_ligne', '(aucune ligne)');
+
+  const lignes = [ligneCSV(
+    T('export.csv_id', 'Vente ID'),
+    T('export.csv_date', 'Date'),
+    T('export.csv_produit', 'Produit'),
+    T('export.csv_quantite', 'Quantite'),
+    T('export.csv_prix_unitaire', 'Prix unitaire'),
+    T('export.csv_sous_total', 'Sous-total')
+  )];
 
   for (const v of ventes) {
     const dateAffichee = formaterDateLocale(v.date_iso);
     const lignesVente = lignesParVente.get(v.id) || [];
     if (lignesVente.length === 0) {
-      lignes.push(ligneCSV(v.id, dateAffichee, '(aucune ligne)', 0, 0, v.total.toFixed(2)));
+      lignes.push(ligneCSV(v.id, dateAffichee, NO_LINE, 0, 0, v.total.toFixed(2)));
       continue;
     }
     for (const l of lignesVente) {
@@ -49,7 +67,18 @@ function genererCSV(ventes, lignesParVente) {
   return lignes.join('\n');
 }
 
-function genererPDF(ventes, lignesParVente, filtres = {}) {
+function genererPDF(ventes, lignesParVente, filtres = {}, i18n = null) {
+  const T = (cle, def, params) => {
+    if (i18n && typeof i18n.t === 'function') {
+      const v = i18n.t(cle, params);
+      if (v && v !== cle) return v;
+    }
+    if (!params) return def;
+    return def.replace(/\{(\w+)\}/g, (_, k) =>
+      params[k] !== undefined ? String(params[k]) : `{${k}}`
+    );
+  };
+
   return new Promise((resolve, reject) => {
     const buffers = [];
     const doc = new PDFDocument({ margin: 40, size: 'A4' });
@@ -58,14 +87,22 @@ function genererPDF(ventes, lignesParVente, filtres = {}) {
     doc.on('end', () => resolve(Buffer.concat(buffers)));
     doc.on('error', reject);
 
-    doc.fontSize(22).fillColor('#0f172a').text('Rapport de ventes', { align: 'center' });
+    doc.fontSize(22).fillColor('#0f172a').text(T('export.titre_pdf', 'Rapport de ventes'), { align: 'center' });
     doc.moveDown(0.3);
 
     if (filtres.dateDebut || filtres.dateFin) {
-      const periode = `Periode : ${filtres.dateDebut || 'debut'} au ${filtres.dateFin || 'aujourd\'hui'}`;
+      const periode = T('export.periode_pdf', 'Periode : {debut} au {fin}', {
+        debut: filtres.dateDebut || '...',
+        fin: filtres.dateFin || '...'
+      });
       doc.fontSize(11).fillColor('#475569').text(periode, { align: 'center' });
     }
-    doc.fontSize(9).fillColor('#94a3b8').text(`Genere le ${new Date().toLocaleString('fr-FR')}`, { align: 'center' });
+
+    const dateGen = new Date().toLocaleString('fr-FR');
+    doc.fontSize(9).fillColor('#94a3b8').text(
+      T('export.generation_pdf', 'Genere le {date}', { date: dateGen }),
+      { align: 'center' }
+    );
     doc.moveDown(1);
 
     let totalPeriode = 0;
@@ -85,7 +122,10 @@ function genererPDF(ventes, lignesParVente, filtres = {}) {
         );
       }
 
-      doc.fontSize(11).fillColor('#0f172a').text(`Total vente : ${v.total.toFixed(2)} EUR`, { align: 'right' });
+      doc.fontSize(11).fillColor('#0f172a').text(
+        T('export.total_vente_pdf', 'Total vente : {total}', { total: `${v.total.toFixed(2)} EUR` }),
+        { align: 'right' }
+      );
       doc.moveDown(0.6);
       totalPeriode += v.total;
     }
@@ -94,11 +134,14 @@ function genererPDF(ventes, lignesParVente, filtres = {}) {
     doc.strokeColor('#1e293b').lineWidth(1).moveTo(40, doc.y).lineTo(555, doc.y).stroke();
     doc.moveDown(0.5);
     doc.fontSize(16).fillColor('#0f172a').text(
-      `TOTAL PERIODE : ${totalPeriode.toFixed(2)} EUR`,
+      T('export.total_periode_pdf', 'TOTAL PERIODE : {total}', { total: `${totalPeriode.toFixed(2)} EUR` }),
       { align: 'right' }
     );
+
+    const clePluriel = ventes.length > 1 ? 'export.nb_ventes_pdf_pluriel' : 'export.nb_ventes_pdf';
+    const defautPluriel = ventes.length > 1 ? '{n} ventes' : '{n} vente';
     doc.fontSize(10).fillColor('#475569').text(
-      `${ventes.length} vente${ventes.length > 1 ? 's' : ''}`,
+      T(clePluriel, defautPluriel, { n: ventes.length }),
       { align: 'right' }
     );
 
@@ -106,4 +149,4 @@ function genererPDF(ventes, lignesParVente, filtres = {}) {
   });
 }
 
-module.exports = { echapperCSV, ligneCSV, genererCSV, genererPDF };
+module.exports = { echapperCSV, ligneCSV, genererCSV, genererPDF, formaterDateLocale };

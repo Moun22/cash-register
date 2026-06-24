@@ -1,12 +1,15 @@
 const { app, BrowserWindow } = require('electron');
 
 const db = require('./services/db');
+const i18nService = require('./services/i18n.service');
+const preferencesService = require('./services/preferences.service');
 const windowManager = require('./window-manager');
 
 const productsIPC = require('./ipc/products.ipc');
 const ventesIPC = require('./ipc/ventes.ipc');
 const historiqueIPC = require('./ipc/historique.ipc');
 const systemeIPC = require('./ipc/systeme.ipc');
+const preferencesIPC = require('./ipc/preferences.ipc');
 
 if (process.platform === 'win32') {
   app.setAppUserModelId('com.cashregister.app');
@@ -14,11 +17,14 @@ if (process.platform === 'win32') {
 
 app.whenReady().then(() => {
   db.init();
+  i18nService.init();
+  i18nService.definirLangue(preferencesService.obtenirAvecDefaut('langue'));
 
   productsIPC.enregistrer();
   ventesIPC.enregistrer();
   historiqueIPC.enregistrer();
   systemeIPC.enregistrer();
+  preferencesIPC.enregistrer();
 
   windowManager.creerFenetrePrincipale();
 

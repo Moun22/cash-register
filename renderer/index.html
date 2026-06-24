@@ -8,16 +8,26 @@
 </head>
 <body>
   <header>
-    <div class="logo">Cash Register</div>
+    <div class="logo" data-i18n="app.nom">Cash Register</div>
     <nav class="onglets">
-      <button class="onglet actif" data-view="caisse">Caisse</button>
-      <button class="onglet" data-view="catalogue">Catalogue</button>
-      <button class="onglet" data-view="historique">Historique</button>
-      <button class="onglet" data-view="dashboard">Tableau de bord</button>
+      <button class="onglet actif" data-view="caisse" data-i18n="onglets.caisse">Caisse</button>
+      <button class="onglet" data-view="catalogue" data-i18n="onglets.catalogue">Catalogue</button>
+      <button class="onglet" data-view="historique" data-i18n="onglets.historique">Historique</button>
+      <button class="onglet" data-view="dashboard" data-i18n="onglets.dashboard">Tableau de bord</button>
     </nav>
+    <div class="preferences">
+      <select id="select-langue" data-i18n-title="preferences.langue">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+      </select>
+      <select id="select-theme" data-i18n-title="preferences.theme">
+        <option value="clair" data-i18n="preferences.theme_clair">Clair</option>
+        <option value="sombre" data-i18n="preferences.theme_sombre">Sombre</option>
+      </select>
+    </div>
     <div id="indicateur-connexion" class="indicateur-connexion en-ligne">
       <span class="point"></span>
-      <span class="texte">En ligne</span>
+      <span class="texte" data-i18n="indicateur.en_ligne">En ligne</span>
     </div>
   </header>
 
@@ -26,21 +36,21 @@
     <section id="view-caisse" class="vue">
       <div class="grille-caisse">
         <div class="bloc">
-          <h2>Ajouter au panier</h2>
-          <input type="text" id="recherche-caisse" class="champ-large" placeholder="Recherche par nom ou code-barres..." autofocus />
+          <h2 data-i18n="caisse.titre_ajouter">Ajouter au panier</h2>
+          <input type="text" id="recherche-caisse" class="champ-large" data-i18n-placeholder="caisse.placeholder_recherche" placeholder="Recherche par nom ou code-barres..." autofocus />
           <div id="resultats-recherche" class="resultats-caisse"></div>
         </div>
 
         <div class="bloc">
-          <h2>Panier</h2>
+          <h2 data-i18n="caisse.titre_panier">Panier</h2>
           <div id="liste-panier" class="liste-panier"></div>
 
           <div class="total-caisse">
-            <span>Total</span>
+            <span data-i18n="caisse.total">Total</span>
             <span id="montant-total" class="montant">0.00 EUR</span>
           </div>
 
-          <button id="btn-valider-vente" class="valider" disabled>Valider la vente</button>
+          <button id="btn-valider-vente" class="valider" data-i18n="caisse.valider" disabled>Valider la vente</button>
           <p id="message-vente" class="message"></p>
         </div>
       </div>
@@ -49,13 +59,13 @@
     <!-- VUE CATALOGUE -->
     <section id="view-catalogue" class="vue cache">
       <div class="bloc">
-        <h2>Ajouter un produit</h2>
+        <h2 data-i18n="catalogue.titre_ajout">Ajouter un produit</h2>
         <form id="form-ajout-produit" class="formulaire">
-          <input type="text" id="code-barres" placeholder="Code-barres (scan ou tape)" inputmode="numeric" />
-          <input type="text" id="nom" placeholder="Nom" required />
-          <input type="number" id="prix" placeholder="Prix" step="0.01" min="0.01" required />
-          <input type="text" id="description" placeholder="Description (optionnel)" />
-          <button type="submit">Ajouter</button>
+          <input type="text" id="code-barres" data-i18n-placeholder="catalogue.placeholder_code_barres" placeholder="Code-barres (scan ou tape)" inputmode="numeric" />
+          <input type="text" id="nom" data-i18n-placeholder="catalogue.placeholder_nom" placeholder="Nom" required />
+          <input type="number" id="prix" data-i18n-placeholder="catalogue.placeholder_prix" placeholder="Prix" step="0.01" min="0.01" required />
+          <input type="text" id="description" data-i18n-placeholder="catalogue.placeholder_description" placeholder="Description (optionnel)" />
+          <button type="submit" data-i18n="catalogue.bouton_ajouter">Ajouter</button>
         </form>
         <p id="statut-lookup" class="statut-lookup"></p>
         <p id="message-ajout" class="message"></p>
@@ -63,70 +73,70 @@
 
       <div class="bloc">
         <div class="ligne-titre">
-          <h2>Catalogue</h2>
-          <input type="text" id="recherche-produit" placeholder="Rechercher (nom, code-barres, description)..." />
+          <h2 data-i18n="catalogue.titre_catalogue">Catalogue</h2>
+          <input type="text" id="recherche-produit" data-i18n-placeholder="catalogue.placeholder_recherche" placeholder="Rechercher (nom, code-barres, description)..." />
         </div>
         <table class="tableau" id="tableau-produits">
           <thead>
             <tr>
-              <th>Code-barres</th>
-              <th>Nom</th>
-              <th>Prix</th>
-              <th>Description</th>
-              <th>Source</th>
-              <th class="col-actions">Actions</th>
+              <th data-i18n="catalogue.col_code_barres">Code-barres</th>
+              <th data-i18n="catalogue.col_nom">Nom</th>
+              <th data-i18n="catalogue.col_prix">Prix</th>
+              <th data-i18n="catalogue.col_description">Description</th>
+              <th data-i18n="catalogue.col_source">Source</th>
+              <th class="col-actions" data-i18n="catalogue.col_actions">Actions</th>
             </tr>
           </thead>
           <tbody id="corps-produits"></tbody>
         </table>
-        <p id="message-vide" class="vide">Aucun produit dans le catalogue.</p>
+        <p id="message-vide" class="vide" data-i18n="catalogue.aucun_produit">Aucun produit dans le catalogue.</p>
       </div>
     </section>
 
     <!-- VUE HISTORIQUE -->
     <section id="view-historique" class="vue cache">
       <div class="bloc">
-        <h2>Historique des ventes</h2>
+        <h2 data-i18n="historique.titre">Historique des ventes</h2>
         <div class="filtres-historique">
-          <label>Du <input type="date" id="hist-date-debut" /></label>
-          <label>Au <input type="date" id="hist-date-fin" /></label>
-          <button id="hist-rafraichir">Filtrer</button>
-          <button id="hist-reset">Tout afficher</button>
+          <label><span data-i18n="historique.du">Du</span> <input type="date" id="hist-date-debut" /></label>
+          <label><span data-i18n="historique.au">Au</span> <input type="date" id="hist-date-fin" /></label>
+          <button id="hist-rafraichir" data-i18n="historique.filtrer">Filtrer</button>
+          <button id="hist-reset" data-i18n="historique.tout_afficher">Tout afficher</button>
           <div class="separateur"></div>
-          <button id="hist-exporter-csv" class="export-csv">Exporter CSV</button>
-          <button id="hist-exporter-pdf" class="export-pdf">Exporter PDF</button>
+          <button id="hist-exporter-csv" class="export-csv" data-i18n="historique.exporter_csv">Exporter CSV</button>
+          <button id="hist-exporter-pdf" class="export-pdf" data-i18n="historique.exporter_pdf">Exporter PDF</button>
         </div>
         <table class="tableau" id="tableau-historique">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Date</th>
-              <th>Articles</th>
-              <th>Total</th>
-              <th class="col-actions">Actions</th>
+              <th data-i18n="historique.col_id">#</th>
+              <th data-i18n="historique.col_date">Date</th>
+              <th data-i18n="historique.col_articles">Articles</th>
+              <th data-i18n="historique.col_total">Total</th>
+              <th class="col-actions" data-i18n="historique.col_actions">Actions</th>
             </tr>
           </thead>
           <tbody id="corps-historique"></tbody>
         </table>
-        <p id="message-historique-vide" class="vide">Aucune vente.</p>
+        <p id="message-historique-vide" class="vide" data-i18n="historique.aucune_vente">Aucune vente.</p>
       </div>
 
       <div class="bloc" id="bloc-detail-vente" style="display: none">
-        <h2>Detail de la vente <span id="detail-id"></span></h2>
+        <h2><span data-i18n="historique.detail_titre">Detail de la vente</span> <span id="detail-id"></span></h2>
         <p id="detail-meta" class="meta-vente"></p>
         <table class="tableau">
           <thead>
             <tr>
-              <th>Produit</th>
-              <th>Quantite</th>
-              <th>Prix unitaire</th>
-              <th class="col-actions">Sous-total</th>
+              <th data-i18n="historique.detail_col_produit">Produit</th>
+              <th data-i18n="historique.detail_col_quantite">Quantite</th>
+              <th data-i18n="historique.detail_col_prix_unitaire">Prix unitaire</th>
+              <th class="col-actions" data-i18n="historique.detail_col_sous_total">Sous-total</th>
             </tr>
           </thead>
           <tbody id="corps-detail"></tbody>
         </table>
         <div class="total-caisse">
-          <span>Total</span>
+          <span data-i18n="caisse.total">Total</span>
           <span id="detail-total" class="montant"></span>
         </div>
       </div>
@@ -135,8 +145,8 @@
     <!-- VUE DASHBOARD -->
     <section id="view-dashboard" class="vue cache">
       <div class="bloc">
-        <h2>Tableau de bord</h2>
-        <p class="vide">Disponible dans une iteration ulterieure (KPIs, bestsellers).</p>
+        <h2 data-i18n="dashboard.titre">Tableau de bord</h2>
+        <p class="vide" data-i18n="dashboard.placeholder">Disponible dans une iteration ulterieure (KPIs, bestsellers).</p>
       </div>
     </section>
   </main>
