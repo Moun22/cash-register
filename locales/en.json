@@ -16,6 +16,29 @@
     "theme_clair": "Light",
     "theme_sombre": "Dark"
   },
+  "menu": {
+    "fichier": "File",
+    "nouvelle_vente": "New sale",
+    "nouveau_produit": "New product",
+    "quitter": "Quit",
+    "edition": "Edit",
+    "undo": "Undo",
+    "redo": "Redo",
+    "couper": "Cut",
+    "copier": "Copy",
+    "coller": "Paste",
+    "affichage": "View",
+    "recharger": "Reload",
+    "outils_dev": "Developer tools",
+    "plein_ecran": "Fullscreen",
+    "aide": "Help",
+    "a_propos": "About"
+  },
+  "about": {
+    "titre": "About",
+    "message": "Cash Register",
+    "detail": "Point-of-sale software - Electron M2 final project."
+  },
   "caisse": {
     "titre_ajouter": "Add to cart",
     "placeholder_recherche": "Search by name or barcode...",

@@ -3,6 +3,7 @@ const { app, BrowserWindow } = require('electron');
 const db = require('./services/db');
 const i18nService = require('./services/i18n.service');
 const preferencesService = require('./services/preferences.service');
+const menuService = require('./services/menu.service');
 const windowManager = require('./window-manager');
 
 const productsIPC = require('./ipc/products.ipc');
@@ -15,6 +16,19 @@ if (process.platform === 'win32') {
   app.setAppUserModelId('com.cashregister.app');
 }
 
+const verrouInstance = app.requestSingleInstanceLock();
+if (!verrouInstance) {
+  app.quit();
+}
+
+app.on('second-instance', () => {
+  const fenetre = windowManager.obtenirFenetre();
+  if (fenetre) {
+    if (fenetre.isMinimized()) fenetre.restore();
+    fenetre.focus();
+  }
+});
+
 app.whenReady().then(() => {
   db.init();
   i18nService.init();
@@ -26,6 +40,7 @@ app.whenReady().then(() => {
   systemeIPC.enregistrer();
   preferencesIPC.enregistrer();
 
+  menuService.appliquerMenu();
   windowManager.creerFenetrePrincipale();
 
   app.on('activate', () => {

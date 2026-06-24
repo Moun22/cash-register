@@ -1,6 +1,7 @@
 const { ipcMain } = require('electron');
 const preferencesService = require('../services/preferences.service');
 const i18nService = require('../services/i18n.service');
+const menuService = require('../services/menu.service');
 
 function enregistrer() {
   ipcMain.handle('preferences:obtenir', () => {
@@ -11,6 +12,7 @@ function enregistrer() {
     preferencesService.definir(cle, valeur);
     if (cle === 'langue') {
       i18nService.definirLangue(valeur);
+      menuService.appliquerMenu();
     }
     return true;
   });

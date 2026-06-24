@@ -9,6 +9,13 @@ export function initCaisse() {
   afficherPanier();
 }
 
+export function viderPanier() {
+  panier = [];
+  document.getElementById('recherche-caisse').value = '';
+  document.getElementById('resultats-recherche').innerHTML = '';
+  afficherPanier();
+}
+
 async function gererRecherche(event) {
   const texte = event.target.value.trim();
   if (!texte) {

@@ -16,6 +16,29 @@
     "theme_clair": "Clair",
     "theme_sombre": "Sombre"
   },
+  "menu": {
+    "fichier": "Fichier",
+    "nouvelle_vente": "Nouvelle vente",
+    "nouveau_produit": "Nouveau produit",
+    "quitter": "Quitter",
+    "edition": "Edition",
+    "undo": "Annuler",
+    "redo": "Refaire",
+    "couper": "Couper",
+    "copier": "Copier",
+    "coller": "Coller",
+    "affichage": "Affichage",
+    "recharger": "Recharger",
+    "outils_dev": "Outils developpeur",
+    "plein_ecran": "Plein ecran",
+    "aide": "Aide",
+    "a_propos": "A propos"
+  },
+  "about": {
+    "titre": "A propos",
+    "message": "Cash Register",
+    "detail": "Logiciel de caisse - projet final Electron M2."
+  },
   "caisse": {
     "titre_ajouter": "Ajouter au panier",
     "placeholder_recherche": "Recherche par nom ou code-barres...",

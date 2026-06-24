@@ -1,5 +1,5 @@
 import { initCatalogue } from './views/catalogue.js';
-import { initCaisse } from './views/caisse.js';
+import { initCaisse, viderPanier } from './views/caisse.js';
 import { initHistorique } from './views/historique.js';
 import { setDictionnaire, appliquerTraductions, t } from './i18n.js';
 
@@ -22,8 +22,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCatalogue();
   initHistorique();
 
+  brancherMenuEvents();
   restaurerOngletActif();
 });
+
+function brancherMenuEvents() {
+  window.electronAPI.events.onMenuNouvelleVente(() => {
+    activerOnglet('caisse');
+    viderPanier();
+    document.getElementById('recherche-caisse').focus();
+  });
+
+  window.electronAPI.events.onMenuNouveauProduit(() => {
+    activerOnglet('catalogue');
+    document.getElementById('form-ajout-produit').reset();
+    document.getElementById('code-barres').focus();
+  });
+}
 
 function appliquerTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);

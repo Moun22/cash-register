@@ -30,4 +30,8 @@ function broadcast(canal, ...args) {
   }
 }
 
-module.exports = { creerFenetrePrincipale, broadcast };
+function obtenirFenetre() {
+  return fenetrePrincipale;
+}
+
+module.exports = { creerFenetrePrincipale, broadcast, obtenirFenetre };
