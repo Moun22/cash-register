@@ -149,4 +149,55 @@ function genererPDF(ventes, lignesParVente, filtres = {}, i18n = null) {
   });
 }
 
-module.exports = { echapperCSV, ligneCSV, genererCSV, genererPDF, formaterDateLocale };
+function genererTicketPDF(vente, lignes, i18n = null) {
+  const T = (cle, def, params) => {
+    if (i18n && typeof i18n.t === 'function') {
+      const v = i18n.t(cle, params);
+      if (v && v !== cle) return v;
+    }
+    if (!params) return def;
+    return def.replace(/\{(\w+)\}/g, (_, k) =>
+      params[k] !== undefined ? String(params[k]) : `{${k}}`
+    );
+  };
+
+  return new Promise((resolve, reject) => {
+    const buffers = [];
+    const doc = new PDFDocument({ size: [220, 600], margin: 12 });
+
+    doc.on('data', (c) => buffers.push(c));
+    doc.on('end', () => resolve(Buffer.concat(buffers)));
+    doc.on('error', reject);
+
+    doc.fontSize(14).text(T('export.ticket_titre', 'Ticket de caisse'), { align: 'center' });
+    doc.fontSize(10).text(T('export.ticket_vente_no', 'Vente #{id}', { id: vente.id }), { align: 'center' });
+    doc.fontSize(8).text(formaterDateLocale(vente.date_iso), { align: 'center' });
+    doc.moveDown(0.4);
+    doc.fontSize(8).text('----------------------------------', { align: 'center' });
+    doc.moveDown(0.2);
+
+    for (const l of lignes) {
+      const sousTotal = (l.prix_unitaire * l.quantite).toFixed(2);
+      doc.fontSize(9).text(l.nom_snapshot);
+      doc.fontSize(8).fillColor('#555').text(
+        `  ${l.quantite} x ${l.prix_unitaire.toFixed(2)}  =  ${sousTotal} EUR`,
+        { align: 'right' }
+      );
+      doc.fillColor('black');
+    }
+
+    doc.moveDown(0.3);
+    doc.fontSize(8).text('----------------------------------', { align: 'center' });
+    doc.moveDown(0.2);
+    doc.fontSize(12).text(
+      T('export.ticket_total', 'TOTAL : {total}', { total: `${vente.total.toFixed(2)} EUR` }),
+      { align: 'right' }
+    );
+    doc.moveDown(0.6);
+    doc.fontSize(9).fillColor('#555').text(T('export.ticket_merci', 'Merci de votre visite !'), { align: 'center' });
+
+    doc.end();
+  });
+}
+
+module.exports = { echapperCSV, ligneCSV, genererCSV, genererPDF, genererTicketPDF, formaterDateLocale };

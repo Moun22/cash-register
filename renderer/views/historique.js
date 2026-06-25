@@ -72,6 +72,9 @@ async function afficherDetail(venteId) {
   document.getElementById('detail-meta').textContent = t('historique.detail_meta', { date: formaterDateLocale(vente.date_iso) });
   document.getElementById('detail-total').textContent = formaterPrix(vente.total);
 
+  const boutonTicket = document.getElementById('btn-ticket-pdf');
+  boutonTicket.onclick = () => window.electronAPI.systeme.exporterTicket(vente.id);
+
   const corps = document.getElementById('corps-detail');
   if (lignes.length === 0) {
     corps.innerHTML = `<tr><td colspan="4" class="vide">${t('historique.detail_aucune_ligne')}</td></tr>`;

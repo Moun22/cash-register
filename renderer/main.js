@@ -1,6 +1,7 @@
 import { initCatalogue } from './views/catalogue.js';
 import { initCaisse, viderPanier } from './views/caisse.js';
 import { initHistorique } from './views/historique.js';
+import { initDashboard } from './views/dashboard.js';
 import { setDictionnaire, appliquerTraductions, t } from './i18n.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCaisse();
   initCatalogue();
   initHistorique();
+  initDashboard();
 
   brancherMenuEvents();
   restaurerOngletActif();

@@ -1,6 +1,8 @@
 const { ipcMain, dialog, BrowserWindow } = require('electron');
 const productsService = require('../services/products.service');
+const importService = require('../services/import.service');
 const i18nService = require('../services/i18n.service');
+const windowManager = require('../window-manager');
 
 function fenetreDe(event) {
   return BrowserWindow.fromWebContents(event.sender);
@@ -45,6 +47,20 @@ function enregistrer() {
 
     if (response !== 1) return false;
     return productsService.supprimer(id);
+  });
+
+  ipcMain.handle('products:importer-csv', async (event) => {
+    const fenetre = fenetreDe(event);
+    const { filePaths, canceled } = await dialog.showOpenDialog(fenetre, {
+      title: i18nService.t('catalogue.bouton_importer'),
+      properties: ['openFile'],
+      filters: [{ name: 'CSV', extensions: ['csv'] }]
+    });
+
+    if (canceled || filePaths.length === 0) return null;
+
+    const resultat = importService.importerDepuisFichier(filePaths[0], productsService);
+    return resultat;
   });
 }
 

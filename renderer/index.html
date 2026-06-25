@@ -74,7 +74,10 @@
       <div class="bloc">
         <div class="ligne-titre">
           <h2 data-i18n="catalogue.titre_catalogue">Catalogue</h2>
-          <input type="text" id="recherche-produit" data-i18n-placeholder="catalogue.placeholder_recherche" placeholder="Rechercher (nom, code-barres, description)..." />
+          <div class="actions-catalogue">
+            <input type="text" id="recherche-produit" data-i18n-placeholder="catalogue.placeholder_recherche" placeholder="Rechercher (nom, code-barres, description)..." />
+            <button id="btn-importer-csv" class="bouton-secondaire" data-i18n="catalogue.bouton_importer">Importer CSV</button>
+          </div>
         </div>
         <table class="tableau" id="tableau-produits">
           <thead>
@@ -90,6 +93,7 @@
           <tbody id="corps-produits"></tbody>
         </table>
         <p id="message-vide" class="vide" data-i18n="catalogue.aucun_produit">Aucun produit dans le catalogue.</p>
+        <p id="message-import" class="message"></p>
       </div>
     </section>
 
@@ -139,14 +143,48 @@
           <span data-i18n="caisse.total">Total</span>
           <span id="detail-total" class="montant"></span>
         </div>
+        <div class="actions-detail-vente">
+          <button id="btn-ticket-pdf" class="bouton-secondaire" data-i18n="historique.bouton_ticket">Ticket PDF</button>
+        </div>
       </div>
     </section>
 
     <!-- VUE DASHBOARD -->
     <section id="view-dashboard" class="vue cache">
+      <div class="grille-kpis">
+        <div class="kpi-card">
+          <div class="kpi-label" data-i18n="dashboard.kpi_ca_jour">CA aujourd'hui</div>
+          <div id="kpi-ca-jour" class="kpi-valeur">0.00 EUR</div>
+          <div id="kpi-evolution" class="kpi-evolution"></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label" data-i18n="dashboard.kpi_nb_ventes_jour">Ventes aujourd'hui</div>
+          <div id="kpi-nb-ventes" class="kpi-valeur">0</div>
+        </div>
+      </div>
+
       <div class="bloc">
-        <h2 data-i18n="dashboard.titre">Tableau de bord</h2>
-        <p class="vide" data-i18n="dashboard.placeholder">Disponible dans une iteration ulterieure (KPIs, bestsellers).</p>
+        <h2 data-i18n="dashboard.bestsellers_titre">Meilleures ventes</h2>
+        <table class="tableau" id="tableau-bestsellers">
+          <thead>
+            <tr>
+              <th data-i18n="dashboard.bestsellers_col_produit">Produit</th>
+              <th data-i18n="dashboard.bestsellers_col_quantite">Quantite</th>
+              <th class="col-actions" data-i18n="dashboard.bestsellers_col_ca">CA</th>
+            </tr>
+          </thead>
+          <tbody id="corps-bestsellers"></tbody>
+        </table>
+        <p id="bestsellers-vide" class="vide" data-i18n="dashboard.bestsellers_aucun">Aucune vente.</p>
+      </div>
+
+      <div class="bloc">
+        <h2 data-i18n="dashboard.maintenance_titre">Maintenance</h2>
+        <div class="maintenance-actions">
+          <button id="btn-sauvegarder" class="bouton-secondaire" data-i18n="dashboard.sauvegarder_bouton">Sauvegarder la base</button>
+          <button id="btn-restaurer" class="bouton-secondaire" data-i18n="dashboard.restaurer_bouton">Restaurer une sauvegarde</button>
+        </div>
+        <p id="message-maintenance" class="message"></p>
       </div>
     </section>
   </main>

@@ -6,5 +6,6 @@ module.exports = {
   trouver: (id) => ipcRenderer.invoke('products:trouver', id),
   ajouter: (donnees) => ipcRenderer.invoke('products:ajouter', donnees),
   modifier: (id, donnees) => ipcRenderer.invoke('products:modifier', id, donnees),
-  supprimer: (id) => ipcRenderer.invoke('products:supprimer', id)
+  supprimer: (id) => ipcRenderer.invoke('products:supprimer', id),
+  importerCSV: () => ipcRenderer.invoke('products:importer-csv')
 };

@@ -69,7 +69,10 @@
     "produit_ajoute": "{nom} added to catalog.",
     "aucun_produit": "No product in the catalog.",
     "aucun_resultat": "No product matches the search.",
-    "supprime_badge": "deleted"
+    "supprime_badge": "deleted",
+    "bouton_importer": "Import CSV",
+    "import_resultat": "{importes} product(s) imported, {ignores} skipped.",
+    "import_format_attendu": "Expected format: code_barres,nom,prix,description (with header)."
   },
   "historique": {
     "titre": "Sales history",
@@ -92,11 +95,27 @@
     "detail_col_quantite": "Quantity",
     "detail_col_prix_unitaire": "Unit price",
     "detail_col_sous_total": "Subtotal",
-    "detail_aucune_ligne": "No line recorded."
+    "detail_aucune_ligne": "No line recorded.",
+    "bouton_ticket": "PDF receipt"
   },
   "dashboard": {
     "titre": "Dashboard",
-    "placeholder": "Coming in a future iteration (KPIs, bestsellers)."
+    "kpi_ca_jour": "Revenue today",
+    "kpi_nb_ventes_jour": "Sales today",
+    "kpi_evolution": "vs yesterday",
+    "kpi_evolution_premiere": "First day",
+    "bestsellers_titre": "Bestsellers (last 7 days)",
+    "bestsellers_aucun": "No sale in the last 7 days.",
+    "bestsellers_col_produit": "Product",
+    "bestsellers_col_quantite": "Quantity",
+    "bestsellers_col_ca": "Revenue",
+    "maintenance_titre": "Maintenance",
+    "sauvegarder_bouton": "Backup database",
+    "restaurer_bouton": "Restore backup",
+    "sauvegarde_ok": "Backup created: {chemin}",
+    "restaurer_confirmer_message": "Restore a backup?",
+    "restaurer_confirmer_detail": "Current data will be replaced and the application will restart.",
+    "restaurer_bouton_confirmer": "Restore and restart"
   },
   "openfoodfacts": {
     "recherche": "Searching OpenFoodFacts...",
@@ -132,7 +151,11 @@
     "csv_quantite": "Quantity",
     "csv_prix_unitaire": "Unit price",
     "csv_sous_total": "Subtotal",
-    "csv_aucune_ligne": "(no line)"
+    "csv_aucune_ligne": "(no line)",
+    "ticket_titre": "Receipt",
+    "ticket_vente_no": "Sale #{id}",
+    "ticket_total": "TOTAL: {total}",
+    "ticket_merci": "Thank you for your visit!"
   },
   "validation": {
     "nom_requis": "Name is required.",

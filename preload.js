@@ -6,6 +6,7 @@ const historique = require('./preload/historique');
 const systeme = require('./preload/systeme');
 const events = require('./preload/events');
 const preferences = require('./preload/preferences');
+const dashboard = require('./preload/dashboard');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   catalogue,
@@ -13,5 +14,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   historique,
   systeme,
   events,
-  preferences
+  preferences,
+  dashboard
 });

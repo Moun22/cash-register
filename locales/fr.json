@@ -69,7 +69,10 @@
     "produit_ajoute": "{nom} ajoute au catalogue.",
     "aucun_produit": "Aucun produit dans le catalogue.",
     "aucun_resultat": "Aucun produit ne correspond a la recherche.",
-    "supprime_badge": "supprime"
+    "supprime_badge": "supprime",
+    "bouton_importer": "Importer CSV",
+    "import_resultat": "{importes} produit(s) importe(s), {ignores} ignore(s).",
+    "import_format_attendu": "Format attendu : code_barres,nom,prix,description (avec entete)."
   },
   "historique": {
     "titre": "Historique des ventes",
@@ -92,11 +95,27 @@
     "detail_col_quantite": "Quantite",
     "detail_col_prix_unitaire": "Prix unitaire",
     "detail_col_sous_total": "Sous-total",
-    "detail_aucune_ligne": "Aucune ligne enregistree."
+    "detail_aucune_ligne": "Aucune ligne enregistree.",
+    "bouton_ticket": "Ticket PDF"
   },
   "dashboard": {
     "titre": "Tableau de bord",
-    "placeholder": "Disponible dans une iteration ulterieure (KPIs, bestsellers)."
+    "kpi_ca_jour": "CA aujourd'hui",
+    "kpi_nb_ventes_jour": "Ventes aujourd'hui",
+    "kpi_evolution": "vs hier",
+    "kpi_evolution_premiere": "Premiere journee",
+    "bestsellers_titre": "Meilleures ventes (7 derniers jours)",
+    "bestsellers_aucun": "Aucune vente sur les 7 derniers jours.",
+    "bestsellers_col_produit": "Produit",
+    "bestsellers_col_quantite": "Quantite",
+    "bestsellers_col_ca": "CA",
+    "maintenance_titre": "Maintenance",
+    "sauvegarder_bouton": "Sauvegarder la base",
+    "restaurer_bouton": "Restaurer une sauvegarde",
+    "sauvegarde_ok": "Sauvegarde creee : {chemin}",
+    "restaurer_confirmer_message": "Restaurer une sauvegarde ?",
+    "restaurer_confirmer_detail": "Les donnees actuelles seront remplacees et l'application redemarrera.",
+    "restaurer_bouton_confirmer": "Restaurer et redemarrer"
   },
   "openfoodfacts": {
     "recherche": "Recherche OpenFoodFacts...",
@@ -132,7 +151,11 @@
     "csv_quantite": "Quantite",
     "csv_prix_unitaire": "Prix unitaire",
     "csv_sous_total": "Sous-total",
-    "csv_aucune_ligne": "(aucune ligne)"
+    "csv_aucune_ligne": "(aucune ligne)",
+    "ticket_titre": "Ticket de caisse",
+    "ticket_vente_no": "Vente #{id}",
+    "ticket_total": "TOTAL : {total}",
+    "ticket_merci": "Merci de votre visite !"
   },
   "validation": {
     "nom_requis": "Le nom est requis.",

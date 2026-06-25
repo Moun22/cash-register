@@ -1,9 +1,10 @@
-const { ipcMain, dialog, BrowserWindow, shell } = require('electron');
+const { ipcMain, dialog, BrowserWindow, shell, app } = require('electron');
 const fs = require('fs');
 
 const openfoodfactsService = require('../services/openfoodfacts.service');
 const ventesService = require('../services/ventes.service');
 const exportService = require('../services/export.service');
+const backupService = require('../services/backup.service');
 const i18nService = require('../services/i18n.service');
 
 function fenetreDe(event) {
@@ -76,6 +77,75 @@ function enregistrer() {
     const buffer = await exportService.genererPDF(ventes, lignesParVente, filtres, i18nService);
     fs.writeFileSync(filePath, buffer);
     shell.showItemInFolder(filePath);
+    return true;
+  });
+
+  ipcMain.handle('systeme:exporter-ticket', async (event, idVente) => {
+    const vente = ventesService.trouver(idVente);
+    if (!vente) return false;
+
+    const lignes = ventesService.listerLignes(idVente);
+    const fenetre = fenetreDe(event);
+
+    const { filePath, canceled } = await dialog.showSaveDialog(fenetre, {
+      title: i18nService.t('historique.bouton_ticket'),
+      defaultPath: `ticket-vente-${vente.id}.pdf`,
+      filters: [{ name: 'PDF', extensions: ['pdf'] }]
+    });
+
+    if (canceled || !filePath) return false;
+
+    const buffer = await exportService.genererTicketPDF(vente, lignes, i18nService);
+    fs.writeFileSync(filePath, buffer);
+    shell.showItemInFolder(filePath);
+    return true;
+  });
+
+  ipcMain.handle('systeme:sauvegarder', async (event) => {
+    const fenetre = fenetreDe(event);
+    const horodatage = new Date().toISOString().slice(0, 10);
+
+    const { filePath, canceled } = await dialog.showSaveDialog(fenetre, {
+      title: i18nService.t('dashboard.sauvegarder_bouton'),
+      defaultPath: `cash-register-backup-${horodatage}.db`,
+      filters: [{ name: 'SQLite', extensions: ['db'] }]
+    });
+
+    if (canceled || !filePath) return null;
+
+    backupService.sauvegarder(filePath);
+    shell.showItemInFolder(filePath);
+    return filePath;
+  });
+
+  ipcMain.handle('systeme:restaurer', async (event) => {
+    const fenetre = fenetreDe(event);
+
+    const { filePaths, canceled } = await dialog.showOpenDialog(fenetre, {
+      title: i18nService.t('dashboard.restaurer_bouton'),
+      properties: ['openFile'],
+      filters: [{ name: 'SQLite', extensions: ['db'] }]
+    });
+
+    if (canceled || filePaths.length === 0) return false;
+
+    const { response } = await dialog.showMessageBox(fenetre, {
+      type: 'warning',
+      buttons: [
+        i18nService.t('dialog.bouton_annuler'),
+        i18nService.t('dashboard.restaurer_bouton_confirmer')
+      ],
+      defaultId: 0,
+      cancelId: 0,
+      message: i18nService.t('dashboard.restaurer_confirmer_message'),
+      detail: i18nService.t('dashboard.restaurer_confirmer_detail')
+    });
+
+    if (response !== 1) return false;
+
+    backupService.restaurer(filePaths[0]);
+    app.relaunch();
+    app.exit(0);
     return true;
   });
 }

@@ -630,3 +630,72 @@ button.valider:disabled {
   color: var(--text-muted);
   margin-bottom: 12px;
 }
+
+.actions-catalogue {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.bouton-secondaire {
+  padding: 7px 14px;
+  font-size: 13px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-button-soft);
+  color: var(--text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.bouton-secondaire:hover {
+  background: var(--bg-button-soft-hover);
+}
+
+.actions-detail-vente {
+  margin-top: 12px;
+  text-align: right;
+}
+
+/* --- Vue Dashboard --- */
+.grille-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.kpi-valeur {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.kpi-evolution {
+  font-size: 13px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.kpi-evolution.positive { color: var(--success-text); }
+.kpi-evolution.negative { color: var(--danger); }
+
+.maintenance-actions {
+  display: flex;
+  gap: 10px;
+}

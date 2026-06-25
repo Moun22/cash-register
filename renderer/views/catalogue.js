@@ -9,6 +9,18 @@ export function initCatalogue() {
   document.getElementById('form-ajout-produit').addEventListener('submit', gererAjout);
   document.getElementById('code-barres').addEventListener('input', gererInputCodeBarres);
   document.getElementById('recherche-produit').addEventListener('input', gererRecherche);
+  document.getElementById('btn-importer-csv').addEventListener('click', gererImportCSV);
+  rafraichirCatalogue();
+}
+
+async function gererImportCSV() {
+  const r = await window.electronAPI.catalogue.importerCSV();
+  if (r === null) return;
+
+  const message = t('catalogue.import_resultat', { importes: r.importes, ignores: r.ignores });
+  const classe = r.importes > 0 ? 'succes' : 'erreur';
+  const detail = r.erreurs && r.erreurs.length ? '\n' + r.erreurs.slice(0, 3).join('\n') : '';
+  afficherMessageTemporaire('message-import', message + detail, classe, 8000);
   rafraichirCatalogue();
 }
 

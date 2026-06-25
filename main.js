@@ -11,6 +11,7 @@ const ventesIPC = require('./ipc/ventes.ipc');
 const historiqueIPC = require('./ipc/historique.ipc');
 const systemeIPC = require('./ipc/systeme.ipc');
 const preferencesIPC = require('./ipc/preferences.ipc');
+const dashboardIPC = require('./ipc/dashboard.ipc');
 
 if (process.platform === 'win32') {
   app.setAppUserModelId('com.cashregister.app');
@@ -39,6 +40,7 @@ app.whenReady().then(() => {
   historiqueIPC.enregistrer();
   systemeIPC.enregistrer();
   preferencesIPC.enregistrer();
+  dashboardIPC.enregistrer();
 
   menuService.appliquerMenu();
   windowManager.creerFenetrePrincipale();
